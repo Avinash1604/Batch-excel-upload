@@ -1,0 +1,27 @@
+package com.test.batch;
+
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.configuration.JobFactory;
+import org.springframework.batch.core.configuration.JobRegistry;
+import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor;
+import org.springframework.batch.core.configuration.support.ReferenceJobFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
+
+
+@Configuration
+@EnableBatchProcessing
+public class BatchConfiguration extends DefaultBatchConfigurer {
+
+    @Override
+    public void setDataSource(DataSource dataSource) {
+        // override to do not set datasource even if a datasource exist.
+        // initialize will use a Map based JobRepository (instead of database)
+    }
+
+}
